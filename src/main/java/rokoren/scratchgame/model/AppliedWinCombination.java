@@ -18,5 +18,10 @@ public class AppliedWinCombination extends AbstractApplied
     {
         super(name);
         this.winCombination = winCombination;
-    }    
+    }  
+    
+    public WinCombination getWinCombination()
+    {
+        return winCombination;
+    }
 }

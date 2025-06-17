@@ -8,13 +8,23 @@ package rokoren.scratchgame.model;
  *
  * @author Rok Koren
  */
-public class SymbolExtraBonus extends Symbol 
+public class SymbolExtraBonus implements Symbol 
 {
-    private final int extra;
+    private final int extraBonus;
 
-    public SymbolExtraBonus(int extra, String name)
+    public SymbolExtraBonus(int extraBonus)
     {
-        super(name);
-        this.extra = extra;
-    }        
+        this.extraBonus = extraBonus;
+    }   
+    
+    @Override
+    public Impact getImpact() 
+    {
+        return Impact.EXTRA_BONUS;
+    }  
+
+    public int getExtraBonus()
+    {
+        return extraBonus;
+    }
 }

@@ -34,21 +34,26 @@ public class ScratchGame
      
     private final MatrixGenerator matrixGenerator = new MatrixGenerator();
     private final BonusGenerator bonusGenerator = new BonusGenerator();
-    private final WinChecker checker = new WinChecker();    
+    private final WinChecker checker = new WinChecker();
+    private final RewardCalculator calculator = new RewardCalculator();
     
     private final Config config;
 
     public ScratchGame(Config config) 
     {
+        assert config != null;        
         this.config = config;
     }    
     
-    public ScratchGameOutput playRound(int bettingAmount)
+    public ScratchGameOutput play(int bettingAmount)
     {
+        LOG.info("Play with betting amount: " + bettingAmount);
         String[][] grid = matrixGenerator.generateGrid(config);  
         Map<AppliedSymbol, List<AppliedWinCombination>> appliedWinCombinations = checker.checkWins(grid, config);
-        List<List<String>> matrix = Arrays.stream(grid).map(Arrays::asList).collect(Collectors.toList());                
-        return new ScratchGameOutput(matrix, appliedWinCombinations, bonusGenerator.generateBonus(config));
+        List<List<String>> matrix = Arrays.stream(grid).map(Arrays::asList).collect(Collectors.toList());  
+        AppliedSymbol bonus = bonusGenerator.generateBonus(config);
+        int reward = calculator.calculateReward(bettingAmount, appliedWinCombinations, bonus);
+        return new ScratchGameOutput(matrix, appliedWinCombinations, bonus, reward);
     }
     
     public static void main(String[] args) 
@@ -98,7 +103,7 @@ public class ScratchGame
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("C:\\Users\\Rok Koren\\NetBeansProjects\\ScratchGame\\src\\main\\java\\rokoren\\scratchgame\\resources\\config.json")));
             Config config = gson.fromJson(reader, Config.class);     
             ScratchGame game = new ScratchGame(config);
-            ScratchGameOutput output = game.playRound(100);
+            ScratchGameOutput output = game.play(100);
             String json = gson.toJson(output);
             LOG.info(json);
             //System.out.println("Hello World!");            

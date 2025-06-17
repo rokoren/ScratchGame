@@ -8,25 +8,21 @@ package rokoren.scratchgame.model;
  *
  * @author Rok Koren
  */
-public abstract class Symbol 
+public interface Symbol 
 {
-    public static final String TYPE_STANDARD = "standard";
-    public static final String TYPE_BONUS    = "bonus";
+    String TYPE_STANDARD = "standard";
+    String TYPE_BONUS    = "bonus";
     
-    public static final String IMPACT_MULTIPLY_REWARD = "multiply_reward";
-    public static final String IMPACT_EXTRA_BONUS     = "extra_bonus";
-    public static final String IMPACT_MISS            = "miss";
+    String IMPACT_MULTIPLY_REWARD = "multiply_reward";
+    String IMPACT_EXTRA_BONUS     = "extra_bonus";
+    String IMPACT_MISS            = "miss";
     
-    private final String name;
+    public enum Impact 
+    {
+        MULTIPLY_REWARD,
+        EXTRA_BONUS,        
+        MISS;   
+    }     
 
-    public Symbol(String name) 
-    {
-        this.name = name;
-    }        
-    
-    @Override
-    public String toString()
-    {
-        return name;
-    }
+    Impact getImpact();
 }

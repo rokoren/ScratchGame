@@ -8,10 +8,11 @@ package rokoren.scratchgame.model;
  *
  * @author Rok Koren
  */
-public class SymbolMiss extends Symbol
+public class SymbolMiss implements Symbol
 {
-    public SymbolMiss(String name) 
+    @Override
+    public Impact getImpact() 
     {
-        super(name);
-    }   
+        return Impact.MISS;
+    }
 }

@@ -21,11 +21,14 @@ public class ScratchGameOutput
     
     @SerializedName("applied_bonus_symbol") 
     private final AppliedSymbol bonus;
+    
+    private final int reward;
 
-    public ScratchGameOutput(List<List<String>> matrix, Map<AppliedSymbol, List<AppliedWinCombination>> appliedWinCombinations, AppliedSymbol bonus) 
+    public ScratchGameOutput(List<List<String>> matrix, Map<AppliedSymbol, List<AppliedWinCombination>> appliedWinCombinations, AppliedSymbol bonus, int reward) 
     {
         this.matrix = matrix;
         this.appliedWinCombinations = appliedWinCombinations;
         this.bonus = bonus;
+        this.reward = reward;
     }   
 }

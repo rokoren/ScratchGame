@@ -14,7 +14,6 @@ import rokoren.scratchgame.model.Symbol;
 import rokoren.scratchgame.model.SymbolExtraBonus;
 import rokoren.scratchgame.model.SymbolMiss;
 import rokoren.scratchgame.model.SymbolMultiplyReward;
-import rokoren.scratchgame.model.SymbolStandard;
 
 /**
  *
@@ -35,7 +34,7 @@ public class SymbolDeserializer implements JsonDeserializer<Symbol>
         if(symbolType.equals(Symbol.TYPE_STANDARD))
         {
             float rewardMultiplier = jsonObject.get(MEMBER_REWARD_MULTIPLIER).getAsFloat();
-            return new SymbolStandard(symbolType, rewardMultiplier);
+            return new SymbolMultiplyReward(rewardMultiplier);
         }
         else if(symbolType.equals(Symbol.TYPE_BONUS))
         {
@@ -43,16 +42,16 @@ public class SymbolDeserializer implements JsonDeserializer<Symbol>
             if(impact.equals(Symbol.IMPACT_MULTIPLY_REWARD))
             {
                 float rewardMultiplier = jsonObject.get(MEMBER_REWARD_MULTIPLIER).getAsFloat();
-                return new SymbolMultiplyReward(symbolType, rewardMultiplier);
+                return new SymbolMultiplyReward(rewardMultiplier);
             }
             else if(impact.equals(Symbol.IMPACT_EXTRA_BONUS))
             {
                 int extra = jsonObject.get(MEMBER_EXTRA).getAsInt();
-                return new SymbolExtraBonus(extra, symbolType);
+                return new SymbolExtraBonus(extra);
             }
             else if(impact.equals(Symbol.IMPACT_MISS))
             {
-                return new SymbolMiss(symbolType);
+                return new SymbolMiss();
             }            
         }
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

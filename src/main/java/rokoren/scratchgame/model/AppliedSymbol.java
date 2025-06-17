@@ -19,4 +19,17 @@ public class AppliedSymbol extends AbstractApplied
         super(name);
         this.symbol = symbol;
     }
+    
+    public float getReward(float value)
+    {
+        if(symbol instanceof SymbolMultiplyReward obj)
+        {
+            return value * obj.getRewardMultiplier();
+        }
+        else if(symbol instanceof SymbolExtraBonus obj)
+        {
+            return value + obj.getExtraBonus();
+        }
+        return value;
+    }
 }

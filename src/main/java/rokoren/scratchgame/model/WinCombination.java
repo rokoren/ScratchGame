@@ -24,5 +24,10 @@ public abstract class WinCombination
         this.rewardMultiplier = rewardMultiplier;
     } 
     
+    public float getRewardMultiplier()
+    {
+        return rewardMultiplier;
+    }
+    
     public abstract Set<String> checkWins(String[][] grid);
 }

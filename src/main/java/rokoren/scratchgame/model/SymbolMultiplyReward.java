@@ -8,10 +8,23 @@ package rokoren.scratchgame.model;
  *
  * @author Rok Koren
  */
-public class SymbolMultiplyReward extends SymbolStandard
+public class SymbolMultiplyReward implements Symbol
 {
-    public SymbolMultiplyReward(String name, float rewardMultiplier) 
+    private final float rewardMultiplier;    
+    
+    public SymbolMultiplyReward(float rewardMultiplier) 
     {
-        super(name, rewardMultiplier);
+        this.rewardMultiplier = rewardMultiplier;        
+    }  
+
+    @Override
+    public Impact getImpact() 
+    {
+        return Impact.MULTIPLY_REWARD;
+    }    
+    
+    public float getRewardMultiplier() 
+    {
+        return rewardMultiplier;
     }      
 }
