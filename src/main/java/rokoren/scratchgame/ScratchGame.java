@@ -4,6 +4,13 @@
 
 package rokoren.scratchgame;
 
+import rokoren.scratchgame.win.WinCalculator;
+import rokoren.scratchgame.generator.MatrixGenerator;
+import rokoren.scratchgame.generator.BonusGenerator;
+import rokoren.scratchgame.applied.AppliedSerializer;
+import rokoren.scratchgame.win.WinCombinationDeserializer;
+import rokoren.scratchgame.symbol.SymbolDeserializer;
+import rokoren.scratchgame.win.WinChecker;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -18,11 +25,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import rokoren.scratchgame.model.AppliedSymbol;
-import rokoren.scratchgame.model.Symbol;
-import rokoren.scratchgame.model.WinCombination;
-import rokoren.scratchgame.model.AppliedWinCombination;
-import rokoren.scratchgame.model.ScratchGameOutput;
+import rokoren.scratchgame.applied.AppliedSymbol;
+import rokoren.scratchgame.symbol.Symbol;
+import rokoren.scratchgame.win.WinCombination;
+import rokoren.scratchgame.applied.AppliedWinCombination;
+import rokoren.scratchgame.applied.AppliedOutput;
 
 /**
  *
@@ -35,7 +42,7 @@ public class ScratchGame
     private final MatrixGenerator matrixGenerator = new MatrixGenerator();
     private final BonusGenerator bonusGenerator = new BonusGenerator();
     private final WinChecker checker = new WinChecker();
-    private final RewardCalculator calculator = new RewardCalculator();
+    private final WinCalculator calculator = new WinCalculator();
     
     private final Config config;
 
@@ -45,7 +52,7 @@ public class ScratchGame
         this.config = config;
     }    
     
-    public ScratchGameOutput play(int bettingAmount)
+    public AppliedOutput play(int bettingAmount)
     {
         LOG.info("Play with betting amount: " + bettingAmount);
         String[][] grid = matrixGenerator.generateGrid(config);  
@@ -53,7 +60,7 @@ public class ScratchGame
         List<List<String>> matrix = Arrays.stream(grid).map(Arrays::asList).collect(Collectors.toList());  
         AppliedSymbol bonus = bonusGenerator.generateBonus(config);
         int reward = calculator.calculateReward(bettingAmount, appliedWinCombinations, bonus);
-        return new ScratchGameOutput(matrix, appliedWinCombinations, bonus, reward);
+        return new AppliedOutput(matrix, appliedWinCombinations, bonus, reward);
     }
     
     public static void main(String[] args) 
@@ -103,7 +110,7 @@ public class ScratchGame
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("C:\\Users\\Rok Koren\\NetBeansProjects\\ScratchGame\\src\\main\\java\\rokoren\\scratchgame\\resources\\config.json")));
             Config config = gson.fromJson(reader, Config.class);     
             ScratchGame game = new ScratchGame(config);
-            ScratchGameOutput output = game.play(100);
+            AppliedOutput output = game.play(100);
             String json = gson.toJson(output);
             LOG.info(json);
             //System.out.println("Hello World!");            

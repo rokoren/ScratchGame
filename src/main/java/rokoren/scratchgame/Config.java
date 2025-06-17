@@ -6,9 +6,9 @@ package rokoren.scratchgame;
 
 import com.google.gson.annotations.SerializedName;
 import java.util.Map;
-import rokoren.scratchgame.model.Probabilities;
-import rokoren.scratchgame.model.Symbol;
-import rokoren.scratchgame.model.WinCombination;
+import rokoren.scratchgame.probabilities.Probabilities;
+import rokoren.scratchgame.symbol.Symbol;
+import rokoren.scratchgame.win.WinCombination;
 
 /**
  *

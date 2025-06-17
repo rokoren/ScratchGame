@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package rokoren.scratchgame;
+package rokoren.scratchgame.win;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
@@ -13,9 +13,9 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import rokoren.scratchgame.model.WinCombination;
-import rokoren.scratchgame.model.WinCombinationLinearSymbols;
-import rokoren.scratchgame.model.WinCombinationSameSymbols;
+import rokoren.scratchgame.win.WinCombination;
+import rokoren.scratchgame.win.WinCombinationLinearSymbols;
+import rokoren.scratchgame.win.WinCombinationSameSymbols;
 
 /**
  *

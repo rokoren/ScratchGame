@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package rokoren.scratchgame;
+package rokoren.scratchgame.win;
 
 import java.util.List;
 import java.util.Map;
-import rokoren.scratchgame.model.AppliedSymbol;
-import rokoren.scratchgame.model.AppliedWinCombination;
+import rokoren.scratchgame.applied.AppliedSymbol;
+import rokoren.scratchgame.applied.AppliedWinCombination;
 
 /**
  *
  * @author Rok Koren
  */
-public class RewardCalculator 
+public class WinCalculator 
 {
     public int calculateReward(int bettingAmount, Map<AppliedSymbol, List<AppliedWinCombination>> winCombinations, AppliedSymbol bonus)
     {

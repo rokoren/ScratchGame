@@ -2,17 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package rokoren.scratchgame;
+package rokoren.scratchgame.win;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import rokoren.scratchgame.model.AppliedSymbol;
-import rokoren.scratchgame.model.Symbol;
-import rokoren.scratchgame.model.WinCombination;
-import rokoren.scratchgame.model.AppliedWinCombination;
+import rokoren.scratchgame.Config;
+import rokoren.scratchgame.applied.AppliedSymbol;
+import rokoren.scratchgame.symbol.Symbol;
+import rokoren.scratchgame.win.WinCombination;
+import rokoren.scratchgame.applied.AppliedWinCombination;
 
 /**
  *

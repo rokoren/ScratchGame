@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package rokoren.scratchgame.model;
+package rokoren.scratchgame.applied;
 
-import rokoren.scratchgame.AbstractApplied;
+import rokoren.scratchgame.symbol.SymbolMultiplyReward;
+import rokoren.scratchgame.symbol.SymbolExtraBonus;
+import rokoren.scratchgame.symbol.Symbol;
 
 /**
  *
