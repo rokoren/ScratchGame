@@ -10,7 +10,12 @@ import java.util.Map;
  *
  * @author Rok Koren
  */
-public class ProbabilitySymbol 
+public class ProbabilitiesSymbol 
 {    
-    protected Map<String, Integer> symbols;      
+    protected Map<String, Integer> symbols;  
+
+    public Map<String, Integer> getSymbols()
+    {
+        return symbols;
+    }
 }

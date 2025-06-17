@@ -24,4 +24,28 @@ public class Config
     @SerializedName("win_combinations")
     private Map<String, WinCombination> winCombinations;
     
+    public int getRows()
+    {
+        return rows;
+    }
+    
+    public int getColumns()
+    {
+        return columns;
+    }
+    
+    public Map<String, Symbol> getSymbols()
+    {
+        return symbols;
+    }
+    
+    public Probabilities getProbabilities()
+    {
+        return probabilities;
+    }
+    
+    public Map<String, WinCombination> getWinCombinations()
+    {
+        return winCombinations;
+    }
 }

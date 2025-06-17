@@ -4,26 +4,25 @@
  */
 package rokoren.scratchgame.model;
 
-import com.google.gson.annotations.SerializedName;
+import java.util.Set;
 
 /**
  *
  * @author Rok Koren
  */
-public class WinCombination 
-{
-    private final String when;
-    private final String group;
+public abstract class WinCombination 
+{  
+    public static final String WHEN_SAME_SYMBOLS   = "same_symbols";
+    public static final String WHEN_LINEAR_SYMBOLS = "linear_symbols";
     
-    @SerializedName("reward_multiplier")
+    public static final String GROUP_SAME_SYMBOLS = "same_symbols";
+    
     private final float rewardMultiplier;
     
-    private final int count;
-
-    public WinCombination(String when, String group, float rewardMultiplier, int count) {
-        this.when = when;
-        this.group = group;
+    public WinCombination(float rewardMultiplier) 
+    {
         this.rewardMultiplier = rewardMultiplier;
-        this.count = count;
-    }        
+    } 
+    
+    public abstract Set<String> checkWins(String[][] grid);
 }
