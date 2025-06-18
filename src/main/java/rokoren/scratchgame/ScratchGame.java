@@ -65,7 +65,6 @@ public class ScratchGame
     
     public static void main(String[] args) 
     {
-        /*
         Map<String, String> arguments = parseArgs(args);        
         
         if (!arguments.containsKey("config") || !arguments.containsKey("betting-amount")) 
@@ -81,7 +80,7 @@ public class ScratchGame
         try {
             bettingAmount = Double.parseDouble(arguments.get("betting-amount"));
         } catch (NumberFormatException e) {
-            System.err.println("Invalid betting amount: " + arguments.get("betting-amount"));
+            LOG.warning("Invalid betting amount: " + arguments.get("betting-amount"));
             System.exit(1);
             return;
         }
@@ -90,11 +89,10 @@ public class ScratchGame
         try {
             configContent = Files.readString(Path.of(configPath));
         } catch (IOException e) {
-            System.err.println("Could not read config file: " + e.getMessage());
+            LOG.warning("Could not read config file: " + e.getMessage());
             System.exit(1);
             return;
         } 
-        */
         
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
@@ -104,21 +102,11 @@ public class ScratchGame
         builder.registerTypeAdapter(AppliedSymbol.class, new AppliedSerializer()); 
         Gson gson = builder.create();
 
-        try
-        {
-            //String url = getClass().getResource("resources/config.json").toExternalForm();          
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("C:\\Users\\Rok Koren\\NetBeansProjects\\ScratchGame\\src\\main\\java\\rokoren\\scratchgame\\resources\\config.json")));
-            Config config = gson.fromJson(reader, Config.class);     
-            ScratchGame game = new ScratchGame(config);
-            AppliedOutput output = game.play(100);
-            String json = gson.toJson(output);
-            LOG.info(json);
-            //System.out.println("Hello World!");            
-        }
-        catch(IOException e)
-        {
-            LOG.warning(e.getMessage());
-        }
+        Config config = gson.fromJson(configContent, Config.class);     
+        ScratchGame game = new ScratchGame(config);
+        AppliedOutput output = game.play(100);
+        String json = gson.toJson(output);
+        LOG.info(json);  
     }
     
     private static Map<String, String> parseArgs(String[] args) 
