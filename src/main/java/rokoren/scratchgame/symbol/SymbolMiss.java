@@ -11,8 +11,8 @@ package rokoren.scratchgame.symbol;
 public class SymbolMiss implements Symbol
 {
     @Override
-    public Impact getImpact() 
+    public int getReward(int bettingAmount) 
     {
-        return Impact.MISS;
+        return bettingAmount;
     }
 }

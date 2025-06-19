@@ -4,8 +4,6 @@
  */
 package rokoren.scratchgame.applied;
 
-import rokoren.scratchgame.symbol.SymbolMultiplyReward;
-import rokoren.scratchgame.symbol.SymbolExtraBonus;
 import rokoren.scratchgame.symbol.Symbol;
 
 /**
@@ -22,16 +20,8 @@ public class AppliedSymbol extends AbstractApplied
         this.symbol = symbol;
     }
     
-    public float getReward(float value)
+    public Symbol getSymbol()
     {
-        if(symbol instanceof SymbolMultiplyReward obj)
-        {
-            return value * obj.getRewardMultiplier();
-        }
-        else if(symbol instanceof SymbolExtraBonus obj)
-        {
-            return value + obj.getExtraBonus();
-        }
-        return value;
+        return symbol;
     }
 }

@@ -18,13 +18,9 @@ public class SymbolMultiplyReward implements Symbol
     }  
 
     @Override
-    public Impact getImpact() 
-    {
-        return Impact.MULTIPLY_REWARD;
-    }    
-    
-    public float getRewardMultiplier() 
-    {
-        return rewardMultiplier;
-    }      
+    public int getReward(int bettingAmount) 
+    { 
+        float reward = bettingAmount * rewardMultiplier;
+        return Math.round(reward);
+    }   
 }

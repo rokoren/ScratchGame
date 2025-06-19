@@ -15,14 +15,7 @@ public interface Symbol
     
     String IMPACT_MULTIPLY_REWARD = "multiply_reward";
     String IMPACT_EXTRA_BONUS     = "extra_bonus";
-    String IMPACT_MISS            = "miss";
-    
-    public enum Impact 
-    {
-        MULTIPLY_REWARD,
-        EXTRA_BONUS,        
-        MISS;   
-    }     
+    String IMPACT_MISS            = "miss";   
 
-    Impact getImpact();
+    int getReward(int bettingAmount);
 }

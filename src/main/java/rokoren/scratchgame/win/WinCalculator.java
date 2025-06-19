@@ -17,16 +17,16 @@ public class WinCalculator
 {
     public int calculateReward(int bettingAmount, Map<AppliedSymbol, List<AppliedWinCombination>> winCombinations, AppliedSymbol bonus)
     {
-        float reward = 0;
-        for(AppliedSymbol symbol : winCombinations.keySet())
+        int reward = 0;
+        for(AppliedSymbol standard : winCombinations.keySet())
         {
-            float symbolReward = symbol.getReward(bettingAmount);
-            for(AppliedWinCombination winCombination : winCombinations.get(symbol))
+            int symbolReward = standard.getSymbol().getReward(bettingAmount);
+            for(AppliedWinCombination winCombination : winCombinations.get(standard))
             {
                 symbolReward *= winCombination.getWinCombination().getRewardMultiplier();
             }
             reward += symbolReward;
         }
-        return Math.round(bonus.getReward(reward));
+        return bonus.getSymbol().getReward(reward);
     }
 }

@@ -16,15 +16,10 @@ public class SymbolExtraBonus implements Symbol
     {
         this.extraBonus = extraBonus;
     }   
-    
-    @Override
-    public Impact getImpact() 
-    {
-        return Impact.EXTRA_BONUS;
-    }  
 
-    public int getExtraBonus()
+    @Override
+    public int getReward(int bettingAmount) 
     {
-        return extraBonus;
+        return bettingAmount + extraBonus;
     }
 }
