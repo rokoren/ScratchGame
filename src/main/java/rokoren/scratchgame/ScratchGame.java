@@ -90,18 +90,12 @@ public class ScratchGame
             return;
         } 
         
-        GsonBuilder builder = new GsonBuilder();
-        builder.setPrettyPrinting();
-        builder.registerTypeAdapter(Symbol.class, new SymbolDeserializer());   
-        builder.registerTypeAdapter(WinCombination.class, new WinCombinationDeserializer()); 
-        builder.registerTypeAdapter(AppliedWinCombination.class, new AppliedSerializer()); 
-        builder.registerTypeAdapter(AppliedSymbol.class, new AppliedSerializer()); 
-        Gson gson = builder.create();
+        JsonProvider provider = new JsonProviderImpl();
 
-        Config config = gson.fromJson(configContent, Config.class);     
+        Config config = provider.getConfig(configContent);
         ScratchGame game = new ScratchGame(config);
         AppliedOutput output = game.play(100);
-        String json = gson.toJson(output);
+        String json = provider.toJson(output);
         LOG.info(json);  
     }
     
@@ -111,5 +105,33 @@ public class ScratchGame
                 .filter(arg -> arg.startsWith("--") && arg.contains("="))
                 .map(arg -> arg.substring(2).split("=", 2))
                 .collect(java.util.stream.Collectors.toMap(a -> a[0], a -> a[1]));
-    }  
+    } 
+    
+    public static final class JsonProviderImpl implements JsonProvider
+    {
+        private final Gson gson;
+
+        public JsonProviderImpl() 
+        {
+            GsonBuilder builder = new GsonBuilder();
+            builder.setPrettyPrinting();
+            builder.registerTypeAdapter(Symbol.class, new SymbolDeserializer());   
+            builder.registerTypeAdapter(WinCombination.class, new WinCombinationDeserializer()); 
+            builder.registerTypeAdapter(AppliedWinCombination.class, new AppliedSerializer()); 
+            builder.registerTypeAdapter(AppliedSymbol.class, new AppliedSerializer()); 
+            gson = builder.create();
+        }                
+        
+        @Override
+        public Config getConfig(String json) 
+        {
+            return gson.fromJson(json, Config.class);     
+        }
+
+        @Override
+        public String toJson(AppliedOutput output)
+        {
+            return gson.toJson(output);
+        }      
+    }
 }
