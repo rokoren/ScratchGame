@@ -31,4 +31,14 @@ public class AppliedOutput
         this.bonus = bonus;
         this.reward = reward;
     }   
+    
+    public List<List<String>> getMatrix()
+    {
+        return matrix;
+    }
+    
+    public AppliedSymbol getBonus()
+    {
+        return bonus;
+    }
 }

@@ -34,7 +34,8 @@ public class ScratchGameTest
     }
     
     @AfterClass
-    public static void tearDownClass() {
+    public static void tearDownClass()
+    {
     }
 
     @Test
@@ -77,8 +78,10 @@ public class ScratchGameTest
         
         ScratchGame game = new ScratchGame(config);
         AppliedOutput output = game.play(100);
-        
+              
         assertNotNull(output);
+        assertFalse(output.getMatrix().isEmpty());  
+        assertNotNull(output.getBonus());        
     }
 
     /**
@@ -107,7 +110,6 @@ public class ScratchGameTest
         assertTrue("Expected a log message containing 'reward'", reward);
         assertTrue("Expected a log message containing 'applied_bonus_symbol'", applied_bonus_symbol);
 
-        // Počisti handler
         logger.removeHandler(handler);       
     }
  

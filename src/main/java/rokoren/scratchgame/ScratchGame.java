@@ -71,10 +71,10 @@ public class ScratchGame
         
 
         String configPath = arguments.get("config");
-        double bettingAmount;
+        int bettingAmount;
 
         try {
-            bettingAmount = Double.parseDouble(arguments.get("betting-amount"));
+            bettingAmount = Integer.parseInt(arguments.get("betting-amount"));
         } catch (NumberFormatException e) {
             LOG.warning("Invalid betting amount: " + arguments.get("betting-amount"));
             System.exit(1);
@@ -94,7 +94,7 @@ public class ScratchGame
 
         Config config = provider.getConfig(configContent);
         ScratchGame game = new ScratchGame(config);
-        AppliedOutput output = game.play(100);
+        AppliedOutput output = game.play(bettingAmount);
         String json = provider.toJson(output);
         LOG.info(json);  
     }
