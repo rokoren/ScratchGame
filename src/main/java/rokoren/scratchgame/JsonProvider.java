@@ -4,6 +4,7 @@
  */
 package rokoren.scratchgame;
 
+import rokoren.scratchgame.config.Config;
 import rokoren.scratchgame.applied.AppliedOutput;
 
 /**

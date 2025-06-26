@@ -5,6 +5,7 @@
 package rokoren.scratchgame.probabilities;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -49,9 +50,23 @@ public class Probabilities
         }        
         return getDeafultSymbols();
     } 
+
+    public List<ProbabilitiesSymbolCell> getStandardSymbols()
+    {
+        if(standardSymbols == null)
+        {
+            standardSymbols = new ArrayList<>();
+        }
+        return standardSymbols;
+    }
     
     public Map<String, Integer> getBonusSymbols()
     {
         return bonusSymbols.getSymbols();
+    }
+    
+    public void setBonusSymbols(ProbabilitiesSymbol symbols)
+    {
+        this.bonusSymbols = symbols;
     }
 }

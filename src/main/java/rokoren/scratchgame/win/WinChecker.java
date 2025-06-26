@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import rokoren.scratchgame.Config;
+import rokoren.scratchgame.config.Config;
 import rokoren.scratchgame.applied.AppliedSymbol;
 import rokoren.scratchgame.symbol.Symbol;
 import rokoren.scratchgame.win.WinCombination;

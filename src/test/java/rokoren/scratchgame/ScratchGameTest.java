@@ -4,16 +4,16 @@
  */
 package rokoren.scratchgame;
 
+import rokoren.scratchgame.config.Config;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import rokoren.scratchgame.ScratchGame.JsonProviderImpl;
 import rokoren.scratchgame.applied.AppliedOutput;
 
@@ -25,26 +25,19 @@ public class ScratchGameTest
 {
     private static final String CONFIG_PATH = "src/main/java/rokoren/scratchgame/resources/config.json";
     
-    public ScratchGameTest() {
-    }
+    private JsonProvider gson;
     
-    @BeforeClass
-    public static void setUpClass() 
+    @Before
+    public void setUp() 
     {
-    }
-    
-    @AfterClass
-    public static void tearDownClass()
-    {
+        gson = new JsonProviderImpl();        
     }
 
     @Test
     public void testLoadValidConfig() throws IOException
     {
-        String configContent = Files.readString(Path.of(CONFIG_PATH));       
-        
-        JsonProvider provider = new JsonProviderImpl();
-        Config config = provider.getConfig(configContent);
+        String configContent = Files.readString(Path.of(CONFIG_PATH));               
+        Config config = gson.getConfig(configContent);
 
         assertTrue(config.getRows() > 1);
         assertTrue(config.getColumns() > 1);
@@ -72,10 +65,7 @@ public class ScratchGameTest
     public void testPlay() throws IOException
     {
         String configContent = Files.readString(Path.of(CONFIG_PATH));       
-        
-        JsonProvider provider = new JsonProviderImpl();
-        Config config = provider.getConfig(configContent);  
-        
+        Config config = gson.getConfig(configContent);          
         ScratchGame game = new ScratchGame(config);
         AppliedOutput output = game.play(100);
               

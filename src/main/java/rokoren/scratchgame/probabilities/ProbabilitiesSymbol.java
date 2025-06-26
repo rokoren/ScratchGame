@@ -4,6 +4,7 @@
  */
 package rokoren.scratchgame.probabilities;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,6 +17,10 @@ public class ProbabilitiesSymbol
 
     public Map<String, Integer> getSymbols()
     {
+        if(symbols == null)
+        {
+            symbols = new HashMap<>();
+        }
         return symbols;
     }
 }

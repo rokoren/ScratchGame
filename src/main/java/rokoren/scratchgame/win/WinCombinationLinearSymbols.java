@@ -57,4 +57,9 @@ public class WinCombinationLinearSymbols extends WinCombination
         }
         return symbols;
     }
+    
+    public static WinCombinationLinearSymbolsBuilder builder()
+    {
+        return new WinCombinationLinearSymbolsBuilder();
+    }    
 }

@@ -4,6 +4,7 @@
 
 package rokoren.scratchgame;
 
+import rokoren.scratchgame.config.Config;
 import rokoren.scratchgame.win.WinCalculator;
 import rokoren.scratchgame.generator.MatrixGenerator;
 import rokoren.scratchgame.generator.BonusGenerator;
@@ -90,12 +91,12 @@ public class ScratchGame
             return;
         } 
         
-        JsonProvider provider = new JsonProviderImpl();
+        JsonProvider gson = new JsonProviderImpl();
 
-        Config config = provider.getConfig(configContent);
+        Config config = gson.getConfig(configContent);
         ScratchGame game = new ScratchGame(config);
         AppliedOutput output = game.play(bettingAmount);
-        String json = provider.toJson(output);
+        String json = gson.toJson(output);
         LOG.info(json);  
     }
     

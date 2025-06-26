@@ -6,7 +6,7 @@ package rokoren.scratchgame.generator;
 
 import java.util.Map;
 import java.util.Random;
-import rokoren.scratchgame.Config;
+import rokoren.scratchgame.config.Config;
 
 /**
  *
