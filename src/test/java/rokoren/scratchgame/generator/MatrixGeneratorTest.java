@@ -5,16 +5,15 @@
 package rokoren.scratchgame.generator;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import rokoren.scratchgame.config.Config;
 import rokoren.scratchgame.probabilities.ProbabilitiesSymbol;
 import rokoren.scratchgame.probabilities.ProbabilitiesSymbolBuilder;
-import rokoren.scratchgame.probabilities.ProbabilitiesSymbolCell;
 import rokoren.scratchgame.probabilities.ProbabilitiesSymbolCellBuilder;
 import rokoren.scratchgame.symbol.Symbol;
 import rokoren.scratchgame.symbol.SymbolExtraBonus;
@@ -198,5 +197,38 @@ public class MatrixGeneratorTest
         assertEquals(4, grid.length);
         assertEquals(4, grid[0].length);        
     }
-    
+ 
+    /**
+     * Test of generateGrid method, of class MatrixGenerator.
+     */
+    @Test
+    public void testSymbolDistributionInGridGeneration() 
+    {
+        MatrixGenerator generator = new MatrixGenerator(); 
+        
+        Map<String, Integer> symbolCounts = new HashMap<>();
+        int totalRuns = 100_000;
+        for (int i = 0; i < totalRuns; i++)
+        {
+            String[][] grid = generator.generateGrid(config);
+            String symbol = grid[0][0];
+            symbolCounts.merge(symbol, 1, Integer::sum);
+        } 
+        
+        // Pretvori v odstotke
+        double percentA = 100.0 * symbolCounts.getOrDefault("A", 0) / totalRuns;
+        double percentB = 100.0 * symbolCounts.getOrDefault("B", 0) / totalRuns;
+        double percentC = 100.0 * symbolCounts.getOrDefault("C", 0) / totalRuns;
+        double percentD = 100.0 * symbolCounts.getOrDefault("D", 0) / totalRuns;
+        double percentE = 100.0 * symbolCounts.getOrDefault("E", 0) / totalRuns;
+        double percentF = 100.0 * symbolCounts.getOrDefault("F", 0) / totalRuns;        
+
+        System.out.printf("A: %.2f%%, B: %.2f%%, C: %.2f, D: %.2f%%, E: %.2f%%, F: %.2f%%%n", percentA, percentB, percentC, percentD, percentE, percentF);
+
+        assertTrue(percentB > percentA);
+        assertTrue(percentC > percentB);
+        assertTrue(percentD > percentC);        
+        assertTrue(percentE > percentD); 
+        assertTrue(percentF > percentE); 
+    }    
 }
