@@ -201,6 +201,47 @@ public class WinCheckerTest
         assertTrue(winCombinations.contains(sameSymbolsHorizontally));
         assertEquals(2, winCombinations.size());        
     }  
+    
+    @Test
+    public void testWinInRow3Symbols() 
+    {
+        System.out.println("testWinInRow");
+        
+        Symbol symbolA = config.getSymbols().get("A");
+        Symbol symbolB = config.getSymbols().get("B");
+        Symbol symbolC = config.getSymbols().get("C");
+        WinCombination sameSymbol3Times = config.getWinCombinations().get("same_symbol_3_times");           
+        WinCombination sameSymbolsHorizontally = config.getWinCombinations().get("same_symbols_horizontally"); 
+        
+        String[][] grid = new String[][] {
+            {"A", "A", "A"},
+            {"B", "B", "B"},
+            {"C", "C", "C"}
+        };        
+        
+        WinChecker checker = new WinChecker();   
+        Map<Symbol, List<WinCombination>> wins = checker.checkWins(grid, config);                
+        List<WinCombination> winCombinationsA = wins.get(symbolA);        
+        List<WinCombination> winCombinationsB = wins.get(symbolB);        
+        List<WinCombination> winCombinationsC = wins.get(symbolC);        
+         
+        assertTrue(wins.containsKey(symbolA));
+        assertTrue(wins.containsKey(symbolB));
+        assertTrue(wins.containsKey(symbolC));
+        assertEquals(3, wins.size());   
+        
+        assertTrue(winCombinationsA.contains(sameSymbol3Times));
+        assertTrue(winCombinationsA.contains(sameSymbolsHorizontally));
+        assertEquals(2, winCombinationsA.size());  
+        
+        assertTrue(winCombinationsB.contains(sameSymbol3Times));
+        assertTrue(winCombinationsB.contains(sameSymbolsHorizontally));
+        assertEquals(2, winCombinationsB.size());         
+        
+        assertTrue(winCombinationsC.contains(sameSymbol3Times));
+        assertTrue(winCombinationsC.contains(sameSymbolsHorizontally));
+        assertEquals(2, winCombinationsC.size());         
+    }     
 
     @Test
     public void testWinInColumn() 
@@ -257,6 +298,38 @@ public class WinCheckerTest
         assertTrue(winCombinations.contains(sameSymbol5Times));
         assertTrue(winCombinations.contains(sameSymbolsHorizontally));
         assertTrue(winCombinations.contains(sameSymbolsVertically));
+        assertEquals(5, winCombinations.size());        
+    }     
+    
+    @Test
+    public void testWinDiagonally() 
+    {
+        System.out.println("testWinDiagonally");
+        
+        Symbol symbolA = config.getSymbols().get("A");
+        WinCombination sameSymbol3Times = config.getWinCombinations().get("same_symbol_3_times");  
+        WinCombination sameSymbol4Times = config.getWinCombinations().get("same_symbol_4_times");         
+        WinCombination sameSymbol5Times = config.getWinCombinations().get("same_symbol_5_times");         
+        WinCombination sameSymbolsDiagonallyLeftToRight = config.getWinCombinations().get("same_symbols_diagonally_left_to_right"); 
+        WinCombination sameSymbolsDiagonallyRightToLeft = config.getWinCombinations().get("same_symbols_diagonally_right_to_left"); 
+        
+        String[][] grid = new String[][] {
+            {"A", "G", "A"},
+            {"C", "A", "F"},
+            {"A", "D", "A"}
+        };        
+        
+        WinChecker checker = new WinChecker();   
+        Map<Symbol, List<WinCombination>> wins = checker.checkWins(grid, config);                
+        List<WinCombination> winCombinations = wins.get(symbolA);        
+         
+        assertTrue(wins.containsKey(symbolA));
+        assertEquals(1, wins.size());        
+        assertTrue(winCombinations.contains(sameSymbol3Times));
+        assertTrue(winCombinations.contains(sameSymbol4Times));
+        assertTrue(winCombinations.contains(sameSymbol5Times));
+        assertTrue(winCombinations.contains(sameSymbolsDiagonallyLeftToRight));
+        assertTrue(winCombinations.contains(sameSymbolsDiagonallyRightToLeft));
         assertEquals(5, winCombinations.size());        
     }     
 }
