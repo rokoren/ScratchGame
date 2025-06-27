@@ -6,7 +6,6 @@ package rokoren.scratchgame.win;
 
 import java.util.List;
 import java.util.Map;
-import rokoren.scratchgame.applied.AppliedSymbol;
 import rokoren.scratchgame.symbol.Symbol;
 
 /**
@@ -15,7 +14,7 @@ import rokoren.scratchgame.symbol.Symbol;
  */
 public class WinCalculator 
 {
-    public int calculateReward(int bettingAmount, Map<Symbol, List<WinCombination>> winCombinations, AppliedSymbol bonus)
+    public int calculateReward(int bettingAmount, Map<Symbol, List<WinCombination>> winCombinations, Symbol bonus)
     {
         int reward = 0;
         for(Symbol standard : winCombinations.keySet())
