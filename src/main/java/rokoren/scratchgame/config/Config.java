@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import rokoren.scratchgame.probabilities.Probabilities;
 import rokoren.scratchgame.symbol.Symbol;
-import rokoren.scratchgame.win.WinCombination;
+import rokoren.scratchgame.win.AbstractWinCombination;
 
 /**
  *
@@ -23,7 +23,7 @@ public class Config
     private Probabilities probabilities;   
     
     @SerializedName("win_combinations")
-    private Map<String, WinCombination> winCombinations;
+    private Map<String, AbstractWinCombination> winCombinations;
     
     public int getRows()
     {
@@ -64,7 +64,7 @@ public class Config
         this.probabilities = probabilities;
     }
     
-    public Map<String, WinCombination> getWinCombinations()
+    public Map<String, AbstractWinCombination> getWinCombinations()
     {
         if(winCombinations == null)
         {

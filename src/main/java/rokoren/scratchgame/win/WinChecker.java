@@ -12,7 +12,6 @@ import java.util.Set;
 import rokoren.scratchgame.config.Config;
 import rokoren.scratchgame.applied.AppliedSymbol;
 import rokoren.scratchgame.symbol.Symbol;
-import rokoren.scratchgame.win.WinCombination;
 import rokoren.scratchgame.applied.AppliedWinCombination;
 
 /**
@@ -21,22 +20,22 @@ import rokoren.scratchgame.applied.AppliedWinCombination;
  */
 public class WinChecker 
 {
-    public Map<AppliedSymbol, List<AppliedWinCombination>> checkWins(String[][] grid, Config config)
+    public Map<Symbol, List<WinCombination>> checkWins(String[][] grid, Config config)
     {
-        Map<AppliedSymbol, List<AppliedWinCombination>> map = new HashMap<>();
+        Map<Symbol, List<WinCombination>> map = new HashMap<>();                
         for(String combinationName : config.getWinCombinations().keySet())
         {
-            WinCombination winCombination = config.getWinCombinations().get(combinationName);
+            AbstractWinCombination winCombination = config.getWinCombinations().get(combinationName);
             Set<String> symbols = winCombination.checkWins(grid);
             if(!symbols.isEmpty())
             {
                 for(String symbolName : symbols)
                 {
-                    Symbol symbol = config.getSymbols().get(symbolName);
-                    List<AppliedWinCombination> results = map.get(symbolName);
+                    Symbol symbol = config.getSymbols().get(symbolName);                                         
+                    List<WinCombination> results = map.get(symbol);
                     if(results == null)
                     {
-                        results = new ArrayList<>();
+                        results = new ArrayList<>();                       
                         map.put(new AppliedSymbol(symbolName, symbol), results);
                     }
                     AppliedWinCombination result = new AppliedWinCombination(combinationName, winCombination);
@@ -44,7 +43,6 @@ public class WinChecker
                 }
             }
         }        
-
         return map;
     }    
 }

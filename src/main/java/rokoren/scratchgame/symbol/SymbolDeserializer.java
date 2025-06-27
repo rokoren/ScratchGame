@@ -10,10 +10,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
-import rokoren.scratchgame.symbol.Symbol;
-import rokoren.scratchgame.symbol.SymbolExtraBonus;
-import rokoren.scratchgame.symbol.SymbolMiss;
-import rokoren.scratchgame.symbol.SymbolMultiplyReward;
 
 /**
  *

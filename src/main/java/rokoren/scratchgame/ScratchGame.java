@@ -27,6 +27,7 @@ import rokoren.scratchgame.symbol.Symbol;
 import rokoren.scratchgame.win.WinCombination;
 import rokoren.scratchgame.applied.AppliedWinCombination;
 import rokoren.scratchgame.applied.AppliedOutput;
+import rokoren.scratchgame.win.AbstractWinCombination;
 
 /**
  *
@@ -53,11 +54,11 @@ public class ScratchGame
     {
         LOG.info("Play with betting amount: " + bettingAmount);
         String[][] grid = matrixGenerator.generateGrid(config);  
-        Map<AppliedSymbol, List<AppliedWinCombination>> appliedWinCombinations = checker.checkWins(grid, config);
+        Map<Symbol, List<WinCombination>> winCombinations = checker.checkWins(grid, config);
         List<List<String>> matrix = Arrays.stream(grid).map(Arrays::asList).collect(Collectors.toList());  
         AppliedSymbol bonus = bonusGenerator.generateBonus(config);
-        int reward = calculator.calculateReward(bettingAmount, appliedWinCombinations, bonus);
-        return new AppliedOutput(matrix, appliedWinCombinations, bonus, reward);
+        int reward = calculator.calculateReward(bettingAmount, winCombinations, bonus);
+        return new AppliedOutput(matrix, winCombinations, bonus, reward);
     }
     
     public static void main(String[] args) 
@@ -117,7 +118,7 @@ public class ScratchGame
             GsonBuilder builder = new GsonBuilder();
             builder.setPrettyPrinting();
             builder.registerTypeAdapter(Symbol.class, new SymbolDeserializer());   
-            builder.registerTypeAdapter(WinCombination.class, new WinCombinationDeserializer()); 
+            builder.registerTypeAdapter(AbstractWinCombination.class, new WinCombinationDeserializer()); 
             builder.registerTypeAdapter(AppliedWinCombination.class, new AppliedSerializer()); 
             builder.registerTypeAdapter(AppliedSymbol.class, new AppliedSerializer()); 
             gson = builder.create();

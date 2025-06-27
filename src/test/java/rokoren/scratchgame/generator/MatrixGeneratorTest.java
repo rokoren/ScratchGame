@@ -7,7 +7,6 @@ package rokoren.scratchgame.generator;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -19,7 +18,7 @@ import rokoren.scratchgame.symbol.Symbol;
 import rokoren.scratchgame.symbol.SymbolExtraBonus;
 import rokoren.scratchgame.symbol.SymbolMiss;
 import rokoren.scratchgame.symbol.SymbolMultiplyReward;
-import rokoren.scratchgame.win.WinCombination;
+import rokoren.scratchgame.win.AbstractWinCombination;
 import rokoren.scratchgame.win.WinCombinationLinearSymbols;
 import rokoren.scratchgame.win.WinCombinationSameSymbols;
 
@@ -110,13 +109,13 @@ public class MatrixGeneratorTest
                 .withSymbol("MISS", 5)
                 .build();
         
-        WinCombination sameSymbol3Times = new WinCombinationSameSymbols(3, 1);
-        WinCombination sameSymbol4Times = new WinCombinationSameSymbols(4, 1.5F);
-        WinCombination sameSymbol5Times = new WinCombinationSameSymbols(5, 2);        
-        WinCombination sameSymbol6Times = new WinCombinationSameSymbols(6, 3);
-        WinCombination sameSymbol7Times = new WinCombinationSameSymbols(7, 5);          
-        WinCombination sameSymbol8Times = new WinCombinationSameSymbols(8, 10);
-        WinCombination sameSymbol9Times = new WinCombinationSameSymbols(9, 20);   
+        AbstractWinCombination sameSymbol3Times = new WinCombinationSameSymbols(3, 1);
+        AbstractWinCombination sameSymbol4Times = new WinCombinationSameSymbols(4, 1.5F);
+        AbstractWinCombination sameSymbol5Times = new WinCombinationSameSymbols(5, 2);        
+        AbstractWinCombination sameSymbol6Times = new WinCombinationSameSymbols(6, 3);
+        AbstractWinCombination sameSymbol7Times = new WinCombinationSameSymbols(7, 5);          
+        AbstractWinCombination sameSymbol8Times = new WinCombinationSameSymbols(8, 10);
+        AbstractWinCombination sameSymbol9Times = new WinCombinationSameSymbols(9, 20);   
         
         WinCombinationLinearSymbols sameSymbolsHorizontally = WinCombinationLinearSymbols.builder()
                 .rewardMultiplier(2)
@@ -179,18 +178,14 @@ public class MatrixGeneratorTest
                 .withWinCombination("same_symbols_diagonally_right_to_left", sameSymbolsDiagonallyRightToLeft)                                
                 .build();
     }
-    
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of generateGrid method, of class MatrixGenerator.
      */
     @Test
-    public void testGenerateGrid() 
+    public void testGridGenerationDimensions() 
     {
-        System.out.println("generateGrid");
+        System.out.println("testGridGenerationDimensions");
         MatrixGenerator generator = new MatrixGenerator();
         String[][] grid = generator.generateGrid(config);
         
@@ -202,8 +197,9 @@ public class MatrixGeneratorTest
      * Test of generateGrid method, of class MatrixGenerator.
      */
     @Test
-    public void testSymbolDistributionInGridGeneration() 
+    public void testGridGenerationSymbolDistribution() 
     {
+        System.out.println("testGridGenerationSymbolDistribution");        
         MatrixGenerator generator = new MatrixGenerator(); 
         
         Map<String, Integer> symbolCounts = new HashMap<>();

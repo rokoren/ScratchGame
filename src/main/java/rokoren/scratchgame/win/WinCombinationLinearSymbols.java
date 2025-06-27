@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
  *
  * @author Rok Koren
  */
-public class WinCombinationLinearSymbols extends WinCombination
+public class WinCombinationLinearSymbols extends AbstractWinCombination
 {
     private final List<List<String>> coveredAreas;
 

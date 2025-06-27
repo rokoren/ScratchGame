@@ -10,7 +10,7 @@ import rokoren.scratchgame.win.WinCombination;
  *
  * @author Rok Koren
  */
-public class AppliedWinCombination extends AbstractApplied
+public class AppliedWinCombination extends AbstractApplied implements WinCombination
 {
     private final WinCombination winCombination;
 
@@ -20,8 +20,29 @@ public class AppliedWinCombination extends AbstractApplied
         this.winCombination = winCombination;
     }  
     
-    public WinCombination getWinCombination()
+    @Override
+    public float getRewardMultiplier() 
     {
-        return winCombination;
+        return winCombination.getRewardMultiplier();
     }
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(obj instanceof AppliedWinCombination applied)
+        {
+            return applied == this;
+        }
+        else if(obj instanceof WinCombination winCombination)
+        {
+            return winCombination == this.winCombination;
+        }      
+        return false;
+    }  
+    
+    @Override
+    public int hashCode() 
+    {
+        return winCombination.hashCode();
+    }      
 }

@@ -10,7 +10,7 @@ import rokoren.scratchgame.probabilities.Probabilities;
 import rokoren.scratchgame.probabilities.ProbabilitiesSymbol;
 import rokoren.scratchgame.probabilities.ProbabilitiesSymbolCell;
 import rokoren.scratchgame.symbol.Symbol;
-import rokoren.scratchgame.win.WinCombination;
+import rokoren.scratchgame.win.AbstractWinCombination;
 
 /**
  *
@@ -20,7 +20,7 @@ public class ConfigBuilder
 {    
     private Map<String, Symbol> symbols = new HashMap<>();
     private Probabilities probabilities = new Probabilities();
-    private Map<String, WinCombination> winCombinations = new HashMap<>();
+    private Map<String, AbstractWinCombination> winCombinations = new HashMap<>();
     
     private int rows    = 3;
     private int columns = 3;    
@@ -58,7 +58,7 @@ public class ConfigBuilder
         return this;
     }   
     
-    public ConfigBuilder withWinCombination(String name, WinCombination combination)
+    public ConfigBuilder withWinCombination(String name, AbstractWinCombination combination)
     {
         winCombinations.put(name, combination);
         return this;

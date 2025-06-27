@@ -4,6 +4,8 @@
  */
 package rokoren.scratchgame.symbol;
 
+import java.util.Objects;
+
 /**
  *
  * @author Rok Koren
@@ -22,5 +24,12 @@ public class SymbolMultiplyReward implements Symbol
     { 
         float reward = bettingAmount * rewardMultiplier;
         return Math.round(reward);
-    }   
+    } 
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj) return true;    
+        return Objects.equals(obj, this);
+    }    
 }

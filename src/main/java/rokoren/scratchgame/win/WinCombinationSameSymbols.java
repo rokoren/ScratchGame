@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  *
  * @author Rok Koren
  */
-public class WinCombinationSameSymbols extends WinCombination
+public class WinCombinationSameSymbols extends AbstractWinCombination
 {
     private final int count;
 

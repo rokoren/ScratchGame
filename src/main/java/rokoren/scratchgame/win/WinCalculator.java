@@ -7,7 +7,7 @@ package rokoren.scratchgame.win;
 import java.util.List;
 import java.util.Map;
 import rokoren.scratchgame.applied.AppliedSymbol;
-import rokoren.scratchgame.applied.AppliedWinCombination;
+import rokoren.scratchgame.symbol.Symbol;
 
 /**
  *
@@ -15,18 +15,18 @@ import rokoren.scratchgame.applied.AppliedWinCombination;
  */
 public class WinCalculator 
 {
-    public int calculateReward(int bettingAmount, Map<AppliedSymbol, List<AppliedWinCombination>> winCombinations, AppliedSymbol bonus)
+    public int calculateReward(int bettingAmount, Map<Symbol, List<WinCombination>> winCombinations, AppliedSymbol bonus)
     {
         int reward = 0;
-        for(AppliedSymbol standard : winCombinations.keySet())
+        for(Symbol standard : winCombinations.keySet())
         {
-            int symbolReward = standard.getSymbol().getReward(bettingAmount);
-            for(AppliedWinCombination winCombination : winCombinations.get(standard))
+            int symbolReward = standard.getReward(bettingAmount);
+            for(WinCombination winCombination : winCombinations.get(standard))
             {
-                symbolReward *= winCombination.getWinCombination().getRewardMultiplier();
+                symbolReward *= winCombination.getRewardMultiplier();
             }
             reward += symbolReward;
         }
-        return bonus.getSymbol().getReward(reward);
+        return bonus.getReward(reward);
     }
 }

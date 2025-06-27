@@ -7,6 +7,8 @@ package rokoren.scratchgame.applied;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Map;
+import rokoren.scratchgame.symbol.Symbol;
+import rokoren.scratchgame.win.WinCombination;
 
 /**
  *
@@ -17,14 +19,14 @@ public class AppliedOutput
     private final List<List<String>> matrix;
     
     @SerializedName("applied_winning_combinations")    
-    private final Map<AppliedSymbol, List<AppliedWinCombination>> winCombinations;
+    private final Map<Symbol, List<WinCombination>> winCombinations;
     
     @SerializedName("applied_bonus_symbol") 
     private final AppliedSymbol bonus;
     
     private final int reward;
 
-    public AppliedOutput(List<List<String>> matrix, Map<AppliedSymbol, List<AppliedWinCombination>> winCombinations, AppliedSymbol bonus, int reward) 
+    public AppliedOutput(List<List<String>> matrix, Map<Symbol, List<WinCombination>> winCombinations, AppliedSymbol bonus, int reward) 
     {
         this.matrix = matrix;
         this.winCombinations = winCombinations;

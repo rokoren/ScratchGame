@@ -2,27 +2,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package rokoren.scratchgame.symbol;
+package rokoren.scratchgame.win;
 
 import java.util.Objects;
+import java.util.Set;
 
 /**
  *
  * @author Rok Koren
  */
-public class SymbolExtraBonus implements Symbol 
+public abstract class AbstractWinCombination implements WinCombination
 {
-    private final int extraBonus;
-
-    public SymbolExtraBonus(int extraBonus)
+    private final float rewardMultiplier;
+    
+    public AbstractWinCombination(float rewardMultiplier) 
     {
-        this.extraBonus = extraBonus;
-    }   
-
+        this.rewardMultiplier = rewardMultiplier;
+    } 
+    
+    public abstract Set<String> checkWins(String[][] grid);    
+    
     @Override
-    public int getReward(int bettingAmount) 
+    public float getRewardMultiplier()
     {
-        return bettingAmount + extraBonus;
+        return rewardMultiplier;
     }
     
     @Override

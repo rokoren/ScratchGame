@@ -4,6 +4,8 @@
  */
 package rokoren.scratchgame.symbol;
 
+import java.util.Objects;
+
 /**
  *
  * @author Rok Koren
@@ -15,4 +17,11 @@ public class SymbolMiss implements Symbol
     {
         return bettingAmount;
     }
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj) return true;    
+        return Objects.equals(obj, this);
+    }     
 }

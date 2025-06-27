@@ -21,5 +21,5 @@ public abstract class AbstractApplied
     public String toString()
     {
         return name;
-    }      
+    }    
 }

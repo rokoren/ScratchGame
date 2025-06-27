@@ -13,9 +13,6 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import rokoren.scratchgame.win.WinCombination;
-import rokoren.scratchgame.win.WinCombinationLinearSymbols;
-import rokoren.scratchgame.win.WinCombinationSameSymbols;
 
 /**
  *

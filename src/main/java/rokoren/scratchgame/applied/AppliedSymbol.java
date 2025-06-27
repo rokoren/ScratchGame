@@ -10,7 +10,7 @@ import rokoren.scratchgame.symbol.Symbol;
  *
  * @author Rok Koren
  */
-public class AppliedSymbol extends AbstractApplied
+public class AppliedSymbol extends AbstractApplied implements Symbol
 {
     private final Symbol symbol;
 
@@ -20,8 +20,29 @@ public class AppliedSymbol extends AbstractApplied
         this.symbol = symbol;
     }
     
-    public Symbol getSymbol()
+    @Override
+    public int getReward(int bettingAmount) 
     {
-        return symbol;
+        return symbol.getReward(bettingAmount);
+    }    
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(obj instanceof AppliedSymbol applied)
+        {
+            return applied == this;
+        }
+        else if(obj instanceof Symbol symbol)
+        {
+            return symbol == this.symbol;
+        }      
+        return false;
     }
+
+    @Override
+    public int hashCode() 
+    {
+        return symbol.hashCode();
+    }     
 }
