@@ -10,8 +10,6 @@ import java.util.Map;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import rokoren.scratchgame.JsonProvider;
-import rokoren.scratchgame.ScratchGame;
 import rokoren.scratchgame.config.Config;
 import rokoren.scratchgame.probabilities.ProbabilitiesSymbol;
 import rokoren.scratchgame.probabilities.ProbabilitiesSymbolBuilder;
@@ -141,8 +139,8 @@ public class WinCheckerTest
                 .build();          
         
         config = Config.builder()
-                .rows(4)
-                .columns(4)
+                .rows(3)
+                .columns(3)
                 .withSymbol("A", symbolA)
                 .withSymbol("B", symbolB)
                 .withSymbol("C", symbolC)
@@ -185,24 +183,80 @@ public class WinCheckerTest
         
         Symbol symbolA = config.getSymbols().get("A");
         WinCombination sameSymbol3Times = config.getWinCombinations().get("same_symbol_3_times");           
+        WinCombination sameSymbolsHorizontally = config.getWinCombinations().get("same_symbols_horizontally"); 
         
         String[][] grid = new String[][] {
             {"A", "A", "A"},
             {"B", "C", "D"},
             {"E", "F", "G"}
-        };
-        
-        JsonProvider gson = new ScratchGame.JsonProviderImpl();
+        };        
         
         WinChecker checker = new WinChecker();   
-        Map<Symbol, List<WinCombination>> wins = checker.checkWins(grid, config);
-        
-        System.out.println("JSON: " + wins);
-        
+        Map<Symbol, List<WinCombination>> wins = checker.checkWins(grid, config);                
         List<WinCombination> winCombinations = wins.get(symbolA);        
          
-        assertTrue(wins.containsKey(symbolA));                               
+        assertTrue(wins.containsKey(symbolA));
+        assertEquals(1, wins.size());        
         assertTrue(winCombinations.contains(sameSymbol3Times));
+        assertTrue(winCombinations.contains(sameSymbolsHorizontally));
+        assertEquals(2, winCombinations.size());        
     }  
-    
+
+    @Test
+    public void testWinInColumn() 
+    {
+        System.out.println("testWinInColumn");
+        
+        Symbol symbolA = config.getSymbols().get("A");
+        WinCombination sameSymbol3Times = config.getWinCombinations().get("same_symbol_3_times");           
+        WinCombination sameSymbolsVertically = config.getWinCombinations().get("same_symbols_vertically"); 
+        
+        String[][] grid = new String[][] {
+            {"A", "B", "E"},
+            {"A", "C", "F"},
+            {"A", "D", "G"}
+        };        
+        
+        WinChecker checker = new WinChecker();   
+        Map<Symbol, List<WinCombination>> wins = checker.checkWins(grid, config);                
+        List<WinCombination> winCombinations = wins.get(symbolA);        
+         
+        assertTrue(wins.containsKey(symbolA));
+        assertEquals(1, wins.size());        
+        assertTrue(winCombinations.contains(sameSymbol3Times));
+        assertTrue(winCombinations.contains(sameSymbolsVertically));
+        assertEquals(2, winCombinations.size());        
+    } 
+
+    @Test
+    public void testWinInRowAndColumn() 
+    {
+        System.out.println("testWinInRowAndColumn");
+        
+        Symbol symbolA = config.getSymbols().get("A");
+        WinCombination sameSymbol3Times = config.getWinCombinations().get("same_symbol_3_times");  
+        WinCombination sameSymbol4Times = config.getWinCombinations().get("same_symbol_4_times");         
+        WinCombination sameSymbol5Times = config.getWinCombinations().get("same_symbol_5_times");         
+        WinCombination sameSymbolsHorizontally = config.getWinCombinations().get("same_symbols_horizontally"); 
+        WinCombination sameSymbolsVertically = config.getWinCombinations().get("same_symbols_vertically"); 
+        
+        String[][] grid = new String[][] {
+            {"A", "A", "A"},
+            {"A", "C", "F"},
+            {"A", "D", "G"}
+        };        
+        
+        WinChecker checker = new WinChecker();   
+        Map<Symbol, List<WinCombination>> wins = checker.checkWins(grid, config);                
+        List<WinCombination> winCombinations = wins.get(symbolA);        
+         
+        assertTrue(wins.containsKey(symbolA));
+        assertEquals(1, wins.size());        
+        assertTrue(winCombinations.contains(sameSymbol3Times));
+        assertTrue(winCombinations.contains(sameSymbol4Times));
+        assertTrue(winCombinations.contains(sameSymbol5Times));
+        assertTrue(winCombinations.contains(sameSymbolsHorizontally));
+        assertTrue(winCombinations.contains(sameSymbolsVertically));
+        assertEquals(5, winCombinations.size());        
+    }     
 }
